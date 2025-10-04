@@ -90,7 +90,7 @@
             </div>
             <h3 class="service-title">Livraison rapide</h3>
             <p class="service-description">
-              Service de livraison express pour vos pièces urgentes. Disponible 7j/7.
+              Service de livraison express pour vos pièces. Disponible 6j/7.
             </p>
             <div class="service-features">
               <span class="feature-tag">⚡ Express 24h</span>
@@ -106,7 +106,9 @@
       <div class="container">
         <div class="section-header fade-in-up">
           <h2 class="section-title">Marques disponibles</h2>
-          <p class="section-subtitle">Nous travaillons avec les plus grandes marques automobiles</p>
+          <p class="section-subtitle">
+            Nous commercialisons les pièces des marques automobiles les plus renommées.
+          </p>
         </div>
 
         <div class="brands-grid">
