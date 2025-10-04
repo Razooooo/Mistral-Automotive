@@ -8,7 +8,7 @@
             Bienvenue chez <span class="text-yellow">Mistral Automotive</span>
           </h1>
           <p class="hero-subtitle fade-in-up" style="animation-delay: 0.2s">
-            Votre distributeur officiel de pièces automobile de la marque RIDEX<br />
+            Votre distributeur de pièces automobile de la marque RIDEX<br />
             AUDI - BMW - MERCEDES - PSA - RENAULT - TOYOTA - VW - HYUNDAI - KIA - JEEP
           </p>
           <div class="hero-buttons fade-in-up" style="animation-delay: 0.4s">
