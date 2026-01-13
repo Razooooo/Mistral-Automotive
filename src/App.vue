@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <NewYearPopup />
     <AppHeader store-name="Mistral Automotive" />
     <main class="main-content">
       <RouterView />
@@ -12,6 +13,7 @@
 import { onMounted } from 'vue'
 import AppHeader from './components/common/AppHeader.vue'
 import AppFooter from './components/common/AppFooter.vue'
+import NewYearPopup from './components/common/NewYearPopup.vue'
 
 // Effets de scroll (version simplifiée sans erreurs)
 const initScrollEffects = () => {
