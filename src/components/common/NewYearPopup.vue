@@ -49,13 +49,20 @@ const isVisible = ref(false)
 
 const closePopup = () => {
   isVisible.value = false
+  // Sauvegarder dans sessionStorage pour ne pas afficher à nouveau pendant cette session
+  sessionStorage.setItem('newYearPopupShown2026', 'true')
 }
 
 onMounted(() => {
-  // Afficher le popup après un petit délai pour une meilleure expérience
-  setTimeout(() => {
-    isVisible.value = true
-  }, 500)
+  // Vérifier si le popup a déjà été affiché dans cette session
+  const hasSeenPopup = sessionStorage.getItem('newYearPopupShown2026')
+
+  if (!hasSeenPopup) {
+    // Afficher le popup après un petit délai pour une meilleure expérience
+    setTimeout(() => {
+      isVisible.value = true
+    }, 500)
+  }
 })
 </script>
 
