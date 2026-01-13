@@ -49,20 +49,13 @@ const isVisible = ref(false)
 
 const closePopup = () => {
   isVisible.value = false
-  // Sauvegarder dans localStorage pour ne pas afficher à nouveau pendant cette session
-  localStorage.setItem('newYearPopupShown2026', 'true')
 }
 
 onMounted(() => {
-  // Vérifier si le popup a déjà été affiché
-  const hasSeenPopup = localStorage.getItem('newYearPopupShown2026')
-
-  if (!hasSeenPopup) {
-    // Afficher le popup après un petit délai pour une meilleure expérience
-    setTimeout(() => {
-      isVisible.value = true
-    }, 500)
-  }
+  // Afficher le popup après un petit délai pour une meilleure expérience
+  setTimeout(() => {
+    isVisible.value = true
+  }, 500)
 })
 </script>
 
