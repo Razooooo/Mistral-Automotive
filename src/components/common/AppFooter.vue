@@ -96,7 +96,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { contactInfo } from '../../data/products'
-
+// ajout logo
 // Année actuelle
 const currentYear = new Date().getFullYear()
 
