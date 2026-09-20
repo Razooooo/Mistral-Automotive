@@ -129,25 +129,17 @@
         <div class="cta-text">
           <h2 class="cta-title">Besoin d'une pièce automobile ?</h2>
           <p class="cta-subtitle">
-            Contactez-nous pour un devis personnalisé ou pour plus d'informations.
+            Parcourez notre catalogue ou contactez-nous pour un devis personnalisé.
           </p>
         </div>
-        <div class="cta-buttons">
-          <a :href="whatsappUrl" target="_blank" rel="noopener" class="btn btn-whatsapp">
-            WhatsApp
-          </a>
-          <a :href="contactInfo.facebook" target="_blank" rel="noopener" class="btn btn-facebook">
-            Facebook
-          </a>
-          <a :href="`tel:${contactInfo.phone}`" class="btn btn-primary">Appeler</a>
-        </div>
+        <router-link to="/products" class="btn btn-primary">Voir le catalogue</router-link>
       </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { contactInfo, getBrands } from '../data/products'
 
@@ -202,13 +194,6 @@ const brandLogos = [
   { name: 'KIA', filter: 'Kia', logo: '/logos/logo_kia.png' },
   { name: 'JEEP', filter: 'Jeep', logo: '/logos/Logo_Jeep.png' },
 ]
-
-// URL WhatsApp
-const whatsappUrl = computed(() => {
-  const message = `Bonjour ! J'aimerais avoir des informations sur vos pièces automobiles.`
-  const phoneNumber = contactInfo.phone.replace(/\s+/g, '').replace('+', '')
-  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-})
 
 // Gestion des erreurs de chargement des logos
 const handleLogoError = (event: Event) => {
@@ -527,12 +512,6 @@ const handleLogoError = (event: Event) => {
   color: #b8bec4;
 }
 
-.cta-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
 /* Responsive */
 @media (max-width: 1024px) {
   .hero-inner {
@@ -598,12 +577,8 @@ const handleLogoError = (event: Event) => {
     height: 120px;
   }
 
-  .cta-buttons {
+  .cta-inner .btn {
     width: 100%;
-  }
-
-  .cta-buttons .btn {
-    flex: 1;
   }
 }
 

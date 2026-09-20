@@ -40,7 +40,7 @@
       <div class="header-content">
         <!-- Logo -->
         <router-link to="/" class="logo" @click="closeMobileMenu">
-          <span class="logo-mark">M</span>
+          <img src="/logo-mark.png" alt="" class="logo-mark" width="44" height="44" />
           <span class="logo-text">
             <span class="logo-name">{{ storeName }}</span>
             <span class="logo-slogan">Safety and comfort</span>
@@ -278,16 +278,10 @@ onUnmounted(() => {
 }
 
 .logo-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  background: var(--primary-green);
-  color: var(--white);
-  font-size: 1.5rem;
-  font-weight: 800;
-  border-radius: 4px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .logo-text {
