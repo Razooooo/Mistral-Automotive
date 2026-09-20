@@ -12,4 +12,5 @@ export interface ContactInfo {
   name: string
   phone: string
   address?: string
+  facebook?: string
 }

@@ -67,6 +67,21 @@
             </svg>
             WhatsApp
           </a>
+
+          <!-- Bouton Facebook -->
+          <a
+            :href="contactInfo.facebook"
+            target="_blank"
+            rel="noopener"
+            class="btn-facebook-header"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              />
+            </svg>
+            Facebook
+          </a>
         </div>
 
         <!-- Menu mobile button -->
@@ -148,6 +163,20 @@
                   />
                 </svg>
                 WhatsApp
+              </a>
+              <a
+                :href="contactInfo.facebook"
+                target="_blank"
+                rel="noopener"
+                @click="closeMobileMenu"
+                class="mobile-contact-link facebook"
+              >
+                <svg class="mobile-nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
+                </svg>
+                Facebook
               </a>
             </div>
           </div>
@@ -398,6 +427,27 @@ onUnmounted(() => {
   background: linear-gradient(135deg, #128c7e, #25d366);
 }
 
+.btn-facebook-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #1877f2, #0c5dc7);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+}
+
+.btn-facebook-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
+  background: linear-gradient(135deg, #0c5dc7, #1877f2);
+}
+
 /* Bouton menu mobile */
 .mobile-menu-btn {
   color: #6c757d;
@@ -513,6 +563,16 @@ onUnmounted(() => {
 .mobile-contact-link.whatsapp:hover {
   background: rgba(37, 211, 102, 0.2);
   color: #128c7e;
+}
+
+.mobile-contact-link.facebook {
+  background: rgba(24, 119, 242, 0.1);
+  color: #1877f2;
+}
+
+.mobile-contact-link.facebook:hover {
+  background: rgba(24, 119, 242, 0.2);
+  color: #0c5dc7;
 }
 
 /* Transitions pour le menu mobile */

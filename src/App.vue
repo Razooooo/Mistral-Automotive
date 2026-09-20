@@ -752,6 +752,17 @@ body {
   box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
 }
 
+.btn-facebook {
+  background: linear-gradient(135deg, #1877f2, #0c5dc7);
+  color: var(--white);
+  box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
+}
+
+.btn-facebook:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(24, 119, 242, 0.4);
+}
+
 .btn:disabled {
   background-color: #adb5bd;
   cursor: not-allowed;

@@ -940,6 +940,7 @@ export const contactInfo: ContactInfo = {
   name: 'Mistral Automotive',
   phone: '+261329115659',
   address: 'Près du gymnase Ankoay Ankorondrano',
+  facebook: 'https://www.facebook.com/profile.php?id=61560276308548&locale=fr_FR',
 }
 
 // Fonctions utilitaires adaptées aux tableaux de marques
