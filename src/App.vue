@@ -76,7 +76,13 @@ onMounted(() => {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   line-height: 1.6;
   color: #333;
   background-color: #f8f9fa;
@@ -103,6 +109,9 @@ body {
   --light-gray: #f8f9fa;
   --medium-gray: #6c757d;
   --white: #ffffff;
+  --ink: #16191c;
+  --ink-2: #22272b;
+  --line: #e3e6e8;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
@@ -675,92 +684,74 @@ body {
   transform: translateY(-0.25rem);
 }
 
-/* Boutons avec effets améliorés */
+/* Boutons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  border-radius: 50px;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
   text-decoration: none;
-  border: none;
+  border: 2px solid transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
-  gap: 0.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.btn:hover::before {
-  left: 100%;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+  gap: 0.6rem;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  background: var(--primary-green);
   color: var(--white);
-  box-shadow: 0 8px 25px rgba(0, 184, 148, 0.3);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(0, 184, 148, 0.4);
+  background: var(--dark-green);
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, var(--accent-yellow), var(--dark-yellow));
-  color: var(--dark-bg);
-  box-shadow: 0 8px 25px rgba(253, 203, 110, 0.3);
+  background: var(--white);
+  color: var(--ink);
 }
 
 .btn-secondary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(253, 203, 110, 0.4);
+  background: var(--primary-green);
+  color: var(--white);
 }
 
 .btn-outline {
   background-color: transparent;
   color: var(--white);
-  border: 2px solid var(--white);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .btn-outline:hover {
+  border-color: var(--white);
   background-color: var(--white);
-  color: var(--primary-green);
-  transform: translateY(-3px);
+  color: var(--ink);
 }
 
 .btn-whatsapp {
-  background: linear-gradient(135deg, #25d366, #128c7e);
+  background: #25d366;
   color: var(--white);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
 }
 
 .btn-whatsapp:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+  background: #1ebe5a;
 }
 
 .btn-facebook {
-  background: linear-gradient(135deg, #1877f2, #0c5dc7);
+  background: #1877f2;
   color: var(--white);
-  box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
 }
 
 .btn-facebook:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(24, 119, 242, 0.4);
+  background: #0c5dc7;
 }
 
 .btn:disabled {
@@ -855,24 +846,6 @@ body {
 
 .animate-in {
   animation: fadeInUp 0.8s ease-out;
-}
-
-/* Elements animables par défaut */
-.service-card,
-.brand-item,
-.product-card {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-}
-
-.service-card.animate-in,
-.brand-item.animate-in,
-.product-card.animate-in {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Responsive utilities */

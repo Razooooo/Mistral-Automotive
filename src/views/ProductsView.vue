@@ -239,12 +239,14 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import ProductCard from '../components/products/ProductCard.vue'
 import { products, contactInfo } from '../data/products'
 
 // État des filtres
-const searchQuery = ref('')
-const selectedBrand = ref('')
+const route = useRoute()
+const searchQuery = ref(typeof route.query.q === 'string' ? route.query.q : '')
+const selectedBrand = ref(typeof route.query.brand === 'string' ? route.query.brand : '')
 const brandSearchQuery = ref('')
 const isDropdownOpen = ref(false)
 const productsGrid = ref<HTMLElement | null>(null)
