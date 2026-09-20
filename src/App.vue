@@ -5,6 +5,7 @@
       <RouterView />
     </main>
     <AppFooter />
+    <CookieConsent />
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import { onMounted } from 'vue'
 import AppHeader from './components/common/AppHeader.vue'
 import AppFooter from './components/common/AppFooter.vue'
+import CookieConsent from './components/common/CookieConsent.vue'
 
 // Effets de scroll (version simplifiée sans erreurs)
 const initScrollEffects = () => {

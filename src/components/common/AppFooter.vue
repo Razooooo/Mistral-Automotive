@@ -86,7 +86,12 @@
       <div class="container py-6">
         <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray">
           <div>© {{ currentYear }} {{ contactInfo.name }}. Tous droits réservés.</div>
-          <div class="mt-2 md:mt-0">Site créé avec <span class="text-green">♥</span></div>
+          <div class="flex gap-4 mt-2 md:mt-0">
+            <router-link to="/mentions-legales" class="footer-link">Mentions légales</router-link>
+            <router-link to="/politique-de-confidentialite" class="footer-link"
+              >Politique de confidentialité</router-link
+            >
+          </div>
         </div>
       </div>
     </div>
