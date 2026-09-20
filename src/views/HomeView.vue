@@ -583,6 +583,14 @@ const handleLogoError = (event: Event) => {
 }
 
 @media (max-width: 520px) {
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
   .trust-grid {
     grid-template-columns: 1fr;
   }
