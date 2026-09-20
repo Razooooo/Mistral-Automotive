@@ -3,8 +3,7 @@
     <div class="cookie-banner-inner">
       <p class="cookie-text">
         Nous utilisons des cookies pour mesurer l'audience du site (Google Analytics) et améliorer
-        votre expérience. Vous pouvez accepter ou refuser ces cookies non essentiels à tout
-        moment.
+        votre expérience. Vous pouvez accepter ou refuser ces cookies non essentiels à tout moment.
         <router-link to="/politique-de-confidentialite" class="cookie-link">
           En savoir plus
         </router-link>
@@ -56,7 +55,7 @@ function decline() {
   right: 0;
   bottom: 0;
   z-index: 1000;
-  background: var(--dark-bg, #2d3436);
+  background: var(--ink, #16191c);
   color: var(--white, #fff);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
   padding: 1.25rem 1rem;
@@ -107,8 +106,11 @@ function decline() {
   border: 1px solid #6c757d;
   color: #dee2e6;
   padding: 0.6rem 1.25rem;
-  border-radius: 50px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -122,6 +124,9 @@ function decline() {
   .cookie-banner-inner {
     flex-direction: column;
     align-items: stretch;
+  }
+  .cookie-text {
+    flex: none;
   }
   .cookie-actions {
     justify-content: stretch;

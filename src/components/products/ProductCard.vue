@@ -1,7 +1,7 @@
 <template>
   <div class="product-card">
     <!-- Image de la pièce avec gestion d'erreur améliorée et hauteur augmentée -->
-    <div class="relative h-80 bg-gray-100 overflow-hidden rounded-t-xl">
+    <div class="relative">
       <div v-if="imageLoading" class="image-placeholder">
         <div class="loading-spinner"></div>
       </div>
@@ -9,17 +9,11 @@
         v-show="!imageLoading && !imageError"
         :src="product.image"
         :alt="product.name"
-        class="w-full h-full object-cover object-center transition-opacity duration-300"
         @load="handleImageLoad"
         @error="handleImageError"
       />
       <div v-if="imageError" class="image-fallback">
-        <svg
-          class="w-12 h-12 text-gray-400 mb-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg class="fallback-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -27,36 +21,32 @@
             d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
           ></path>
         </svg>
-        <span class="text-sm text-gray-500 font-medium text-center">{{ product.name }}</span>
+        <span class="fallback-name">{{ product.name }}</span>
       </div>
     </div>
 
     <!-- Contenu de la carte -->
-    <div class="p-6 flex-1 flex flex-direction-column border-t-2 border-gray-400">
+    <div class="product-body">
       <!-- Nom de la pièce -->
-      <h3 class="text-xl font-semibold text-dark mb-3 leading-tight">
+      <h3 class="product-name">
         {{ product.name }}
       </h3>
 
       <!-- Description -->
-      <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3 flex-1">
+      <p class="product-description">
         {{ product.description }}
       </p>
 
       <!-- Tags marques de voiture avec limitation d'affichage -->
-      <div class="flex items-center w-full">
-        <div class="flex gap-2 flex-nowrap overflow-x-auto scrollbar-hide w-full">
-          <span
-            v-for="brandName in product.brand.slice(0, 2)"
-            :key="brandName"
-            class="brand-tag flex-shrink-0"
-          >
+      <div class="brand-row">
+        <div class="brand-row-inner">
+          <span v-for="brandName in product.brand.slice(0, 2)" :key="brandName" class="brand-tag">
             {{ brandName }}
           </span>
           <button
             v-if="product.brand.length > 2"
             @click="showModal = true"
-            class="brand-tag brand-tag-more flex-shrink-0"
+            class="brand-tag brand-tag-more"
           >
             +{{ product.brand.length - 2 }}
           </button>
@@ -122,220 +112,241 @@ const handleImageError = () => {
 
 <style scoped>
 .product-card {
-  background: white;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border: 1px solid #e5e7eb;
-  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
-  border-color: rgba(0, 184, 148, 0.3);
+  border-color: var(--primary-green);
+  box-shadow: 0 8px 20px rgba(22, 25, 28, 0.08);
 }
 
-/* CORRECTION: Container d'image avec dimensions fixes et object-fit */
+/* Image */
 .product-card .relative {
   position: relative;
   width: 100%;
-  min-height: 320px; /* hauteur fixe */
-  max-height: 320px; /* hauteur fixe */
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  height: 220px;
+  background: var(--light-gray);
 }
 
 .product-card img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Force l'image à couvrir tout le conteneur */
-  object-position: center; /* Centre l'image */
-  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
-.image-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  z-index: 1;
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e9ecef;
-  border-top: 4px solid #00b894;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
+.image-placeholder,
 .image-fallback {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  text-align: center;
-  padding: 20px;
+  background: var(--light-gray);
 }
 
-.line-clamp-3 {
+.image-placeholder {
+  z-index: 1;
+}
+
+.fallback-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  color: #adb5bd;
+}
+
+.fallback-name {
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.image-fallback {
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--line);
+  border-top-color: var(--primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Contenu */
+.product-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 16px 18px 18px;
+  border-top: 3px solid var(--primary-green);
+}
+
+.product-name {
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.product-description {
   display: -webkit-box;
+  flex: 1;
+  margin-bottom: 12px;
+  overflow: hidden;
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+  line-height: 1.55;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-.brand-tag {
-  background: rgba(0, 184, 148, 0.1);
-  color: #00b894;
-  padding: 4px 10px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: 1px solid rgba(0, 184, 148, 0.2);
-  display: inline-block;
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-}
-
-/* Classe pour cacher les barres de défilement */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
+.product-description:empty {
   display: none;
 }
 
-.brand-tag-more {
-  background: rgba(0, 184, 148, 0.2);
-  color: #00a085;
+/* Marques compatibles */
+.brand-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  width: 100%;
+  margin-top: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.brand-row-inner {
+  display: flex;
+  gap: 6px;
+}
+
+.brand-row::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-tag {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: var(--light-gray);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-tag-more {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: var(--white);
   cursor: pointer;
-  border: none;
-  transition: all 0.3s ease;
   user-select: none;
-  min-width: 32px;
-  text-align: center;
+  transition: background 0.15s;
 }
 
 .brand-tag-more:hover {
-  background: rgba(0, 184, 148, 0.3);
-  transform: scale(1.05);
+  background: var(--dark-green);
 }
 
-.brand-tag-more:active {
-  transform: scale(0.95);
-  background: rgba(0, 184, 148, 0.4);
-}
-
-/* Modal Styles */
+/* Fenêtre des marques compatibles */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
   padding: 20px;
+  background: rgba(22, 25, 28, 0.6);
 }
 
 .modal-content {
-  background: white;
-  border-radius: 15px;
-  max-width: 400px;
   width: 100%;
+  max-width: 420px;
   max-height: 80vh;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-  animation: modalShow 0.3s ease;
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: modalShow 0.2s ease;
 }
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid #e5e7eb;
-  background: linear-gradient(135deg, #00b894, #00a085);
-  color: white;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--ink);
+  border-bottom: 3px solid var(--primary-green);
+  color: var(--white);
 }
 
 .modal-title {
-  font-size: 1.2rem;
-  font-weight: 700;
   margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .modal-close {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background 0.3s ease;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .modal-body {
+  max-height: 60vh;
   padding: 20px;
   overflow-y: auto;
-  max-height: 60vh;
 }
 
 .brand-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .brand-tag-modal {
-  background: rgba(0, 184, 148, 0.1);
-  color: #00b894;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: 1px solid rgba(0, 184, 148, 0.2);
-  display: inline-block;
-  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
 }
 
-.flex-direction-column {
-  flex-direction: column;
-}
-
-/* Animations */
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
@@ -343,59 +354,34 @@ const handleImageError = () => {
 @keyframes modalShow {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(-20px);
+    transform: translateY(-12px);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0);
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .product-card {
-    border-radius: 12px;
-  }
-
+@media (max-width: 767px) {
   .product-card .relative {
-    min-height: 200px;
-    max-height: 200px;
+    height: 150px;
   }
 
-  .p-6 {
-    padding: 1rem;
+  .product-body {
+    padding: 12px;
   }
 
-  .text-xl {
-    font-size: 1rem;
+  .product-name {
+    font-size: 0.9rem;
   }
 
-  .text-sm {
-    font-size: 0.8rem;
+  .product-description {
+    font-size: 0.78rem;
   }
 
   .brand-tag {
-    font-size: 0.7rem;
     padding: 3px 8px;
-    border-radius: 12px;
-  }
-
-  .brand-tag-more {
     font-size: 0.65rem;
-    min-width: 28px;
-  }
-
-  .modal-content {
-    margin: 10px;
-    max-width: none;
-  }
-
-  .modal-header {
-    padding: 15px;
-  }
-
-  .modal-body {
-    padding: 15px;
   }
 }
 </style>
